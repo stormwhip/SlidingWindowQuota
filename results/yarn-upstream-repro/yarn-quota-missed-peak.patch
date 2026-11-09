@@ -1,0 +1,72 @@
+--- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/src/test/java/org/apache/hadoop/yarn/server/resourcemanager/reservation/TestCapacityOverTimePolicy.java
++++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/src/test/java/org/apache/hadoop/yarn/server/resourcemanager/reservation/TestCapacityOverTimePolicy.java
+@@ -17,14 +17,26 @@
+  *******************************************************************************/
+ package org.apache.hadoop.yarn.server.resourcemanager.reservation;
+ 
++import static org.junit.jupiter.api.Assertions.assertThrows;
++import static org.junit.jupiter.api.Assertions.assertTrue;
++import static org.mockito.Mockito.mock;
++
+ import java.io.IOException;
+ import java.util.Arrays;
+ import java.util.Collection;
++import java.util.Collections;
+ 
+ import net.jcip.annotations.NotThreadSafe;
+ 
++import org.apache.hadoop.yarn.api.records.ReservationDefinition;
++import org.apache.hadoop.yarn.api.records.Resource;
+ import org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException;
+ import org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningQuotaException;
++import org.apache.hadoop.yarn.server.resourcemanager.reservation.planning.ReservationAgent;
++import org.apache.hadoop.yarn.server.resourcemanager.scheduler.QueueMetrics;
++import org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator;
++import org.apache.hadoop.yarn.util.resource.ResourceCalculator;
++import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.params.ParameterizedTest;
+ import org.junit.jupiter.params.provider.MethodSource;
+ 
+@@ -148,4 +160,41 @@
+     runTest();
+   }
+ 
++  @Test
++  public void testRejectsQuotaPeakBetweenIntegralSamples()
++      throws PlanningException {
++    String queue = ReservationSystemTestUtil.getFullReservationQueueName();
++    Resource min = Resource.newInstance(1, 1);
++    Resource total = Resource.newInstance(100, 100);
++    ResourceCalculator calculator = new DefaultResourceCalculator();
++    InMemoryPlan plan = new InMemoryPlan(mock(QueueMetrics.class),
++        getInitializedPolicy(), mock(ReservationAgent.class), total, 1000L,
++        calculator, min, total, queue, null, true,
++        ReservationSystemTestUtil.createMockRMContext());
++
++    long t0 = 1791808200000L;
++    long halfway = t0 + 12 * ONEHOUR;
++    long end = t0 + 36 * ONEHOUR;
++    assertTrue(plan.addReservation(
++        flatAllocation(t0, halfway, 40, queue, calculator, min), false));
++
++    // The first 24h contain 12h at 40 MiB and 12h at 20 MiB.
++    // Their 30 MiB average exceeds the configured 25 MiB quota.
++    // The sampled right endpoints each see only 480 MiB-hours.
++    assertThrows(PlanningQuotaException.class, () -> plan.addReservation(
++        flatAllocation(halfway, end, 20, queue, calculator, min), false));
++  }
++
++  private static InMemoryReservationAllocation flatAllocation(long start,
++      long end, int memory, String queue, ResourceCalculator calculator,
++      Resource minimum) {
++    ReservationDefinition definition = ReservationSystemTestUtil
++        .createSimpleReservationDefinition(start, end, end - start, 1, null);
++    return new InMemoryReservationAllocation(
++        ReservationSystemTestUtil.getNewReservationId(), definition, "u1",
++        queue, start, end,
++        Collections.singletonMap(new ReservationInterval(start, end),
++            Resource.newInstance(memory, 1)), calculator, minimum);
++  }
++
+ }
+\ No newline at end of file

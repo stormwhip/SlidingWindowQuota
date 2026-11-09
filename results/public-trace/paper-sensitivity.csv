@@ -1,0 +1,9 @@
+dataset,quota_percent,exact_reject_rate,misjudge_rate,false_accept,false_reject,both_accept,both_integral,both_instant
+cerit,2,0.7825,0.0633,68,8,253,871,0
+cerit,5,0.7017,0.0692,54,29,327,788,2
+cerit,10,0.47,0.1325,123,36,235,441,365
+cerit,25,0.0358,0.0108,0,13,225,43,919
+kth,2,0.2008,0.0775,93,0,959,148,0
+kth,5,0.0633,0.0042,0,5,1119,76,0
+kth,10,0.0208,0.0,0,0,1175,25,0
+kth,25,0.005,0.0,0,0,1194,6,0

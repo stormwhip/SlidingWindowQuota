@@ -1,0 +1,16 @@
+# Raw public workload archives are not redistributed.
+results/public-trace/grid-jobs.swf
+results/public-trace/KTH-SP2-1996-2.1-cln.swf.gz
+
+# Build and cache outputs.
+yarn-java/target/
+**/__pycache__/
+*.pyc
+*.class
+
+# Local scratch.
+tmp/
+*.log.tmp
+
+# Deep applied-patch check tree (duplicate of upstream sources).
+results/yarn-upstream-repro/apply-check/

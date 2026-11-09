@@ -1,0 +1,22 @@
+{
+  "kth": {
+    "sha256": "3e152f201fd2e96808a735bced6ea6eb0bb07fdc447689cafb0750d87b264c0b",
+    "eligible_jobs": 20523,
+    "users_in_replay": 64,
+    "selected_jobs": 1450,
+    "measured_jobs": 1200,
+    "warmup_jobs": 250,
+    "capacity": 100,
+    "first_submit": 599850
+  },
+  "cerit": {
+    "sha256": "dd48cf7ca369d485b14add5d2baca70a1001c19d9b447688ff7639812673dc7c",
+    "eligible_jobs": 467798,
+    "users_in_replay": 37,
+    "selected_jobs": 1450,
+    "measured_jobs": 1200,
+    "warmup_jobs": 250,
+    "capacity": 256,
+    "first_submit": 1449133300
+  }
+}

@@ -1,0 +1,111 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< local.quota:yarn-quota-validation >------------------
+[INFO] Building yarn-quota-validation 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ yarn-quota-validation ---
+[INFO] skip non existing resourceDirectory E:\Revision\sliding-window-quota\yarn-java\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ yarn-quota-validation ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- build-helper:3.6.1:add-test-source (pin-upstream) @ yarn-quota-validation ---
+[INFO] Test Source directory: E:\Revision\sliding-window-quota\results\yarn-policy\trunk-source added.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ yarn-quota-validation ---
+[INFO] Copying 3 resources from src\test\resources to target\trunk-regression\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ yarn-quota-validation ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug release 17] to target\trunk-regression\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ yarn-quota-validation ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\hp\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+WARNING: Final field propertyTagsMap in class org.apache.hadoop.conf.Configuration has been unreflected for mutation by class org.apache.hadoop.conf.Configuration in unnamed module @33cb5951 (file:/C:/Users/hp/.m2/repository/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+[ERROR] Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 7.572 s <<< FAILURE! -- in org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy
+[ERROR] org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testUserAllocationInProgressAtEndOfCheckedWindow -- Time elapsed: 7.369 s <<< ERROR!
+org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningQuotaException: Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_8978116399206869938_5014663588823627010
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:206)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.InMemoryPlan.addReservation(InMemoryPlan.java:348)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testUserAllocationInProgressAtEndOfCheckedWindow(TestCapacityOverTimePolicy.java:185)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException: RLESparseResourceAllocation: merge failed as the resulting RLESparseResourceAllocation would be negative, when testing: (-9223372036768375809=<memory:2123748267, vCores:2073973>) > (1791743400000=<memory:256000, vCores:250>)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.combineValue(RLESparseResourceAllocation.java:462)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:353)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:312)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:197)
+	... 5 more
+
+[ERROR] org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testPeriodicAllocationCrossingPeriodBoundary -- Time elapsed: 0.092 s <<< ERROR!
+org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningQuotaException: Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_6593785923605706350_5002148119177578911
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:206)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.InMemoryPlan.addReservation(InMemoryPlan.java:348)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testPeriodicAllocationCrossingPeriodBoundary(TestCapacityOverTimePolicy.java:201)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException: RLESparseResourceAllocation: merge failed as the resulting RLESparseResourceAllocation would be negative, when testing: (-9223372036768375809=<memory:288000, vCores:281>) > (-172800000=<memory:256000, vCores:250>)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.combineValue(RLESparseResourceAllocation.java:462)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:353)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:312)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:197)
+	... 5 more
+
+[ERROR] org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testUpdateReservationWithinQuota -- Time elapsed: 0.071 s <<< ERROR!
+org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningQuotaException: Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_-2783224337156697452_-4153089931271555830
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:206)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.InMemoryPlan.updateReservation(InMemoryPlan.java:397)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.TestCapacityOverTimePolicy.testUpdateReservationWithinQuota(TestCapacityOverTimePolicy.java:223)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException: RLESparseResourceAllocation: merge failed as the resulting RLESparseResourceAllocation would be negative, when testing: (1791894600000=<memory:520533, vCores:508>) > (1791721800000=<memory:256000, vCores:250>)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.combineValue(RLESparseResourceAllocation.java:462)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:366)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResourceAllocation.merge(RLESparseResourceAllocation.java:312)
+	at org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityOverTimePolicy.validate(CapacityOverTimePolicy.java:197)
+	... 5 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   TestCapacityOverTimePolicy.testPeriodicAllocationCrossingPeriodBoundary:201 ? PlanningQuota Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_6593785923605706350_5002148119177578911
+[ERROR]   TestCapacityOverTimePolicy.testUpdateReservationWithinQuota:223 ? PlanningQuota Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_-2783224337156697452_-4153089931271555830
+[ERROR]   TestCapacityOverTimePolicy.testUserAllocationInProgressAtEndOfCheckedWindow:185 ? PlanningQuota Integral (avg over time) quota capacity 0.25 over a window of 86400 seconds,  would be exceeded by accepting reservation: reservation_8978116399206869938_5014663588823627010
+[INFO] 
+[ERROR] Tests run: 3, Failures: 0, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.320 s
+[INFO] Finished at: 2026-11-08T23:14:25+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project yarn-quota-validation: 
+[ERROR] 
+[ERROR] See E:\Revision\sliding-window-quota\yarn-java\target\trunk-regression\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

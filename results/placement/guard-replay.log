@@ -1,0 +1,20 @@
+kth block 0 completed
+kth block 1 completed
+kth block 2 completed
+kth block 3 completed
+cerit block 0 completed
+cerit block 1 completed
+cerit block 2 completed
+cerit block 3 completed
+original fixed 5578 0 0 0 None
+original retry_1h 5576 -2 -4 16 3457
+original retry_4h 5564 -14 -21 66 14107
+original short_15m 5581 3 3 5 7536
+original short_1h 5576 -2 0 11 13814
+original short_small 5576 -2 0 11 13814
+later fixed 15913 0 0 0 None
+later retry_1h 16064 151 80 232 3368
+later retry_4h 16174 261 134 762 13506
+later short_15m 15932 19 18 25 9362
+later short_1h 16128 215 229 307 12823
+later short_small 16128 215 229 307 12823

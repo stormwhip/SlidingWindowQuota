@@ -1,0 +1,9 @@
+dataset,quota_percent,legacy_accept,legacy_violating_admits,legacy_violating_rate,legacy_max_admit_excess_pct,legacy_final_over_quota_pct,exact_final_over_quota_pct,divergent
+cerit,2,279,18,0.0645,32.1,32.1,-0.1,24
+cerit,5,380,11,0.0289,44.6,44.6,0.0,46
+cerit,10,328,4,0.0122,12.0,12.0,-0.2,184
+cerit,25,327,0,0.0,0.0,-6.6,0.0,297
+kth,2,1194,79,0.0662,71.8,71.8,-0.0,91
+kth,5,1357,0,0.0,0.0,-1.9,-0.4,6
+kth,10,1423,0,0.0,0.0,-1.0,-1.0,0
+kth,25,1444,0,0.0,0.0,-3.3,-3.3,0

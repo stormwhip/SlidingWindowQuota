@@ -1,0 +1,98 @@
+[
+  {
+    "dataset": "cerit",
+    "quota_percent": 2,
+    "legacy_accept": 279,
+    "legacy_violating_admits": 18,
+    "exact_accept": 283,
+    "divergent": 24,
+    "legacy_violating_rate": 0.0645,
+    "legacy_max_admit_excess_pct": 32.1,
+    "legacy_final_over_quota_pct": 32.1,
+    "exact_final_over_quota_pct": -0.1
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 5,
+    "legacy_accept": 380,
+    "legacy_violating_admits": 11,
+    "exact_accept": 392,
+    "divergent": 46,
+    "legacy_violating_rate": 0.0289,
+    "legacy_max_admit_excess_pct": 44.6,
+    "legacy_final_over_quota_pct": 44.6,
+    "exact_final_over_quota_pct": 0.0
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 10,
+    "legacy_accept": 328,
+    "legacy_violating_admits": 4,
+    "exact_accept": 316,
+    "divergent": 184,
+    "legacy_violating_rate": 0.0122,
+    "legacy_max_admit_excess_pct": 12.0,
+    "legacy_final_over_quota_pct": 12.0,
+    "exact_final_over_quota_pct": -0.2
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 25,
+    "legacy_accept": 327,
+    "legacy_violating_admits": 0,
+    "exact_accept": 280,
+    "divergent": 297,
+    "legacy_violating_rate": 0.0,
+    "legacy_max_admit_excess_pct": 0.0,
+    "legacy_final_over_quota_pct": -6.6,
+    "exact_final_over_quota_pct": 0.0
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 2,
+    "legacy_accept": 1194,
+    "legacy_violating_admits": 79,
+    "exact_accept": 1163,
+    "divergent": 91,
+    "legacy_violating_rate": 0.0662,
+    "legacy_max_admit_excess_pct": 71.8,
+    "legacy_final_over_quota_pct": 71.8,
+    "exact_final_over_quota_pct": -0.0
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 5,
+    "legacy_accept": 1357,
+    "legacy_violating_admits": 0,
+    "exact_accept": 1363,
+    "divergent": 6,
+    "legacy_violating_rate": 0.0,
+    "legacy_max_admit_excess_pct": 0.0,
+    "legacy_final_over_quota_pct": -1.9,
+    "exact_final_over_quota_pct": -0.4
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 10,
+    "legacy_accept": 1423,
+    "legacy_violating_admits": 0,
+    "exact_accept": 1423,
+    "divergent": 0,
+    "legacy_violating_rate": 0.0,
+    "legacy_max_admit_excess_pct": 0.0,
+    "legacy_final_over_quota_pct": -1.0,
+    "exact_final_over_quota_pct": -1.0
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 25,
+    "legacy_accept": 1444,
+    "legacy_violating_admits": 0,
+    "exact_accept": 1444,
+    "divergent": 0,
+    "legacy_violating_rate": 0.0,
+    "legacy_max_admit_excess_pct": 0.0,
+    "legacy_final_over_quota_pct": -3.3,
+    "exact_final_over_quota_pct": -3.3
+  }
+]

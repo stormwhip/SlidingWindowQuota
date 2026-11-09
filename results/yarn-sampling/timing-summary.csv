@@ -1,0 +1,11 @@
+scenario,accepted,pairs,original_p50_us,exact_p50_us,original_p95_us,exact_p95_us,min_fork_p95_ratio,max_fork_p95_ratio
+dense1024_short,false,480,126.6,31.2,166.525,48.03,3.141,3.819
+dense1024_short,true,480,100.5,20.9,136.55,30.91,4.201,4.817
+dense1024_wide,false,480,1429.9,615.7,2053.51,860.47,2.34,2.432
+dense1024_wide,true,480,1523.15,639.0,2193.485,890.49,2.414,2.526
+dense128_short,false,480,130.7,32.5,1498.755,192.345,2.815,11.539
+dense128_short,true,480,85.45,23.5,372.74,81.03,2.298,11.721
+dense128_wide,false,480,241.45,86.2,435.775,144.45,2.672,3.303
+dense128_wide,true,480,217.15,81.85,339.53,129.055,2.23,3.098
+one_run_many_windows,false,480,105.25,19.8,215.36,42.84,4.132,6.612
+one_run_many_windows,true,480,79.5,8.9,130.58,15.2,8.216,11.313
