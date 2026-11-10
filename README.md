@@ -47,6 +47,7 @@ python -B -m Experiments.AnalyzeContinuousWorlds
 python -B -m Experiments.ExportPaperTables
 python -B -m Experiments.ReferenceReplay
 python -B -m Experiments.ReferenceSensitivity all
+python -B -m Experiments.QuotaConversionReplay --output Runs/QuotaConversionReplay.json
 python -B -m Experiments.EvaluatePlacementIntervals
 python -B -m Experiments.SummarizeRmQuota
 python -B -m Experiments.PlotFigures --output Runs/Figures
@@ -57,6 +58,13 @@ The reference runs reproduce the sampling and rounding comparison, quota
 conversion, heterogeneous-memory checks, and replacements. The archived
 same-state replay splits the four quotas into two sweeps. The summarizer also
 accepts three fresh replay files that each cover all four quotas.
+
+`QuotaConversionReplay` reproduces the continuous quota-conversion sensitivity
+results in Section 7.5. It runs each policy on its own history under YARN's
+limits and under limits rounded to the nearest resource unit, with halves
+rounded upward. It checks the original-limit admission counts and peak
+excesses against the archived Java replay before writing the result. The
+recorded output is [Results/Reference/QuotaConversionReplay.json](Results/Reference/QuotaConversionReplay.json).
 
 ### Fresh measurements
 

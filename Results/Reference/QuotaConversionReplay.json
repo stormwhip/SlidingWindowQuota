@@ -1,0 +1,266 @@
+[
+  {
+    "dataset": "kth",
+    "quota_percent": 2,
+    "capacity_cores": 100,
+    "yarn_limits": {
+      "cores": 1,
+      "memory_mib": 2047
+    },
+    "rounded_limits": {
+      "cores": 2,
+      "memory_mib": 2048
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 1194,
+        "peak_excess_percent": 71.8
+      },
+      "rounded_limits": {
+        "admissions": 1237,
+        "peak_excess_percent": 0.2
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 1163,
+        "peak_excess_percent": -0.0
+      },
+      "rounded_limits": {
+        "admissions": 1228,
+        "peak_excess_percent": -0.0
+      }
+    }
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 5,
+    "capacity_cores": 100,
+    "yarn_limits": {
+      "cores": 5,
+      "memory_mib": 5120
+    },
+    "rounded_limits": {
+      "cores": 5,
+      "memory_mib": 5120
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 1357,
+        "peak_excess_percent": -1.9
+      },
+      "rounded_limits": {
+        "admissions": 1357,
+        "peak_excess_percent": -1.9
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 1363,
+        "peak_excess_percent": -0.4
+      },
+      "rounded_limits": {
+        "admissions": 1363,
+        "peak_excess_percent": -0.4
+      }
+    }
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 10,
+    "capacity_cores": 100,
+    "yarn_limits": {
+      "cores": 10,
+      "memory_mib": 10240
+    },
+    "rounded_limits": {
+      "cores": 10,
+      "memory_mib": 10240
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 1423,
+        "peak_excess_percent": -1.0
+      },
+      "rounded_limits": {
+        "admissions": 1423,
+        "peak_excess_percent": -1.0
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 1423,
+        "peak_excess_percent": -1.0
+      },
+      "rounded_limits": {
+        "admissions": 1423,
+        "peak_excess_percent": -1.0
+      }
+    }
+  },
+  {
+    "dataset": "kth",
+    "quota_percent": 25,
+    "capacity_cores": 100,
+    "yarn_limits": {
+      "cores": 25,
+      "memory_mib": 25600
+    },
+    "rounded_limits": {
+      "cores": 25,
+      "memory_mib": 25600
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 1444,
+        "peak_excess_percent": -3.3
+      },
+      "rounded_limits": {
+        "admissions": 1444,
+        "peak_excess_percent": -3.3
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 1444,
+        "peak_excess_percent": -3.3
+      },
+      "rounded_limits": {
+        "admissions": 1444,
+        "peak_excess_percent": -3.3
+      }
+    }
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 2,
+    "capacity_cores": 256,
+    "yarn_limits": {
+      "cores": 5,
+      "memory_mib": 5242
+    },
+    "rounded_limits": {
+      "cores": 5,
+      "memory_mib": 5243
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 279,
+        "peak_excess_percent": 32.1
+      },
+      "rounded_limits": {
+        "admissions": 280,
+        "peak_excess_percent": 32.1
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 283,
+        "peak_excess_percent": -0.1
+      },
+      "rounded_limits": {
+        "admissions": 283,
+        "peak_excess_percent": -0.1
+      }
+    }
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 5,
+    "capacity_cores": 256,
+    "yarn_limits": {
+      "cores": 12,
+      "memory_mib": 13107
+    },
+    "rounded_limits": {
+      "cores": 13,
+      "memory_mib": 13107
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 380,
+        "peak_excess_percent": 44.6
+      },
+      "rounded_limits": {
+        "admissions": 368,
+        "peak_excess_percent": 40.7
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 392,
+        "peak_excess_percent": 0.0
+      },
+      "rounded_limits": {
+        "admissions": 398,
+        "peak_excess_percent": -0.1
+      }
+    }
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 10,
+    "capacity_cores": 256,
+    "yarn_limits": {
+      "cores": 25,
+      "memory_mib": 26214
+    },
+    "rounded_limits": {
+      "cores": 26,
+      "memory_mib": 26214
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 328,
+        "peak_excess_percent": 12.0
+      },
+      "rounded_limits": {
+        "admissions": 323,
+        "peak_excess_percent": 9.4
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 316,
+        "peak_excess_percent": -0.2
+      },
+      "rounded_limits": {
+        "admissions": 324,
+        "peak_excess_percent": -0.0
+      }
+    }
+  },
+  {
+    "dataset": "cerit",
+    "quota_percent": 25,
+    "capacity_cores": 256,
+    "yarn_limits": {
+      "cores": 64,
+      "memory_mib": 65536
+    },
+    "rounded_limits": {
+      "cores": 64,
+      "memory_mib": 65536
+    },
+    "sampled": {
+      "yarn_limits": {
+        "admissions": 327,
+        "peak_excess_percent": -6.6
+      },
+      "rounded_limits": {
+        "admissions": 327,
+        "peak_excess_percent": -6.6
+      }
+    },
+    "exact": {
+      "yarn_limits": {
+        "admissions": 280,
+        "peak_excess_percent": 0.0
+      },
+      "rounded_limits": {
+        "admissions": 280,
+        "peak_excess_percent": 0.0
+      }
+    }
+  }
+]
