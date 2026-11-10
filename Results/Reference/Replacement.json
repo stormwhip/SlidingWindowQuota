@@ -1,0 +1,58 @@
+[
+ {
+  "dataset": "kth",
+  "quota": 2,
+  "checks": 117,
+  "sampled_fa": 10,
+  "sampled_fr": 0
+ },
+ {
+  "dataset": "kth",
+  "quota": 5,
+  "checks": 137,
+  "sampled_fa": 0,
+  "sampled_fr": 0
+ },
+ {
+  "dataset": "kth",
+  "quota": 10,
+  "checks": 143,
+  "sampled_fa": 0,
+  "sampled_fr": 2
+ },
+ {
+  "dataset": "kth",
+  "quota": 25,
+  "checks": 145,
+  "sampled_fa": 0,
+  "sampled_fr": 1
+ },
+ {
+  "dataset": "cerit",
+  "quota": 2,
+  "checks": 29,
+  "sampled_fa": 4,
+  "sampled_fr": 1
+ },
+ {
+  "dataset": "cerit",
+  "quota": 5,
+  "checks": 40,
+  "sampled_fa": 1,
+  "sampled_fr": 2
+ },
+ {
+  "dataset": "cerit",
+  "quota": 10,
+  "checks": 32,
+  "sampled_fa": 1,
+  "sampled_fr": 3
+ },
+ {
+  "dataset": "cerit",
+  "quota": 25,
+  "checks": 28,
+  "sampled_fa": 0,
+  "sampled_fr": 4
+ }
+]

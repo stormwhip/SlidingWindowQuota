@@ -1,97 +1,116 @@
-# Artifact: Sliding-Window Quotas in Apache Hadoop YARN
+# SlidingWindowQuota
 
-Code and experimental data for the paper *Sliding-Window Quotas in Apache Hadoop
-YARN: Exact Admission and Flexible Placement*.
+Research artifact for *Sliding-Window Quotas in Apache Hadoop YARN: Exact Admission and Flexible Placement*.
 
-The repository contains the Java exact quota validator, the Python prototypes and
-replay drivers, the per-request measurements behind the four experimental tables,
-and the scripts that rebuild the trace-derived inputs. The manuscript itself is
-maintained separately.
-
-## Contents
-
-| Path | Description |
+| Path | Contents |
 | --- | --- |
-| `yarn-java/` | Java implementation on Hadoop 3.5.0 with the YARN-12022 baseline; policy, regression tests and ResourceManager replay drivers. |
-| `prepare_public_reservation_trace.py` | Converts the KTH SP2 and CERIT-SC accounting logs into the reservation streams used by the replays. |
-| `verify_bridge.py` | Correctness checks for the tangent index and reservation trial updates. |
-| `measure_*.py`, `analyze_*.py`, `summarize_*.py` | Replay and measurement drivers for the reported experiments. |
-| `results/` | Per-request timings, logs, and derived summaries. Raw third-party traces are not redistributed (see below). |
-| `scripts/download_traces.ps1` | Downloads the CERIT-SC log, verifies both archive files by SHA-256, and can regenerate `requests.csv`. |
-| `*.md` | Project notes for individual experiment rounds, including the trace-derived placement experiments. |
+| [Yarn](Yarn) | Java exact quota policy, pinned sampled baselines, and JUnit regression and measurement drivers |
+| [Placement](Placement) | Python implementation of the feasible-start interval scan |
+| [Experiments](Experiments) | Trace preparation, experiment launchers, summaries, and figure generation |
+| [Results](Results) | Derived reservation streams, recorded measurements, and paper summaries |
+| [Figures](Figures) | Vector figures for the missed peak and event-count scaling |
+| [UpstreamPatches](UpstreamPatches) | Standalone YARN reproducer and exact-policy patch |
 
-## Requirements
+The exploratory implementations and research notes are available in the
+[original artifact revision](https://github.com/stormwhip/SlidingWindowQuota/tree/19f1c6d6ca13cbd2d91873a558e81fe31d942113).
 
-- Windows with PowerShell 7 (the replay drivers use PowerShell).
-- Python 3.11; the replay scripts use the standard library only.
-- JDK 17 or newer (tested with OpenJDK 26.0.1), Maven 3.9, and network access to
-  Maven Central for the Hadoop 3.5.0 dependencies on the first build.
+## Baselines
 
-## Data
+| Role | Pinned source |
+| --- | --- |
+| Runtime and Maven dependencies | Hadoop 3.5.0, [dbcc7cd797100e6b32cd84f85b53a5193a5f9af0](https://github.com/apache/hadoop/commit/dbcc7cd797100e6b32cd84f85b53a5193a5f9af0) |
+| Sampled policy used in comparisons | YARN-12022 [PR 8815](https://github.com/apache/hadoop/pull/8815), [f99af959fd4e26cf0b359e6f341d560761d14101](https://github.com/apache/hadoop/commit/f99af959fd4e26cf0b359e6f341d560761d14101) |
+| Unpatched policy used in the reproducer | Hadoop trunk, [1fdf777d777d74e9de04961e9a657e61107eadec](https://github.com/apache/hadoop/commit/1fdf777d777d74e9de04961e9a657e61107eadec) |
 
-The raw workloads are public but are **not** redistributed here:
+The YARN-12022 proposal bounds the merge horizon and accounts for replacements
+by subtracting the old allocation. Its integral check uses sampled prefixes.
+The exact policy retains YARN's instantaneous check and computes window totals
+from rate changes at both edges.
 
-- **KTH SP2** (Lars Malinowsky, Parallel Workloads Archive), file
-  `KTH-SP2-1996-2.1-cln.swf.gz`, SHA-256
-  `3e152f201fd2e96808a735bced6ea6eb0bb07fdc447689cafb0750d87b264c0b`.
-- **CERIT-SC** (Dalibor Klusáček and Boris Parák, JSSPP workload archive), file
-  `grid-jobs.swf`, SHA-256
-  `dd48cf7ca369d485b14add5d2baca70a1001c19d9b447688ff7639812673dc7c`.
+## Reproduce
 
-Run
+Use Python 3.11 or later, PowerShell 7, Maven 3.9, and JDK 17 or later.
+Figure generation requires Matplotlib. The Java measurements in the artifact
+were collected on Windows on an Intel Core i9-14900HX with JDK 26.0.1.
+Run commands from the repository root.
 
-```powershell
-pwsh -File scripts/download_traces.ps1
-```
+### Correctness and published summaries
 
-to fetch the CERIT-SC log into `results/public-trace/` and verify both hashes.
-The KTH archive blocks automated clients; the script reports the archive page for
-a manual download. After both files are present, run with `-Derive` to regenerate
-`results/public-trace/requests.csv`. The derived file is included in the
-repository, so the replays can also be run without the raw traces.
+~~~powershell
+mvn -B -ntp -f Yarn/pom.xml test
+python -B -m Experiments.VerifySamplingBias
+New-Item -ItemType Directory -Force Runs | Out-Null
+Copy-Item Results Runs/Recorded -Recurse
+$env:SLIDING_WINDOW_QUOTA_RESULTS = (Resolve-Path Runs/Recorded).Path
+python -B -m Experiments.SummarizePublicReservationTrace
+python -B -m Experiments.AnalyzeContinuousWorlds
+python -B -m Experiments.ExportPaperTables
+python -B -m Experiments.ReferenceReplay
+python -B -m Experiments.ReferenceSensitivity all
+python -B -m Experiments.EvaluatePlacementIntervals
+python -B -m Experiments.SummarizeRmQuota
+python -B -m Experiments.PlotFigures --output Runs/Figures
+Remove-Item Env:SLIDING_WINDOW_QUOTA_RESULTS
+~~~
 
-Please acknowledge the archives as requested by their maintainers:
+The reference runs reproduce the sampling and rounding comparison, quota
+conversion, heterogeneous-memory checks, and replacements. The archived
+same-state replay splits the four quotas into two sweeps. The summarizer also
+accepts three fresh replay files that each cover all four quotas.
 
-- KTH SP2: Parallel Workloads Archive, https://www.cs.huji.ac.il/labs/parallel/workload/.
-- CERIT-SC: D. Klusáček and B. Parák, "Analysis of Mixed Workloads from Shared
-  Cloud Infrastructure", JSSPP 2017; JSSPP workload archive,
-  https://jsspp.org/workload/.
+### Fresh measurements
 
-## Reproduction
+~~~powershell
+pwsh -File Experiments/RunExperiments.ps1 -Experiment PublicTrace -OutputDirectory Runs/Fresh
+pwsh -File Experiments/RunExperiments.ps1 -Experiment ResourceManager -OutputDirectory Runs/Fresh
+pwsh -File Experiments/RunExperiments.ps1 -Experiment EventScaling -OutputDirectory Runs/Fresh
+$env:SLIDING_WINDOW_QUOTA_RESULTS = (Resolve-Path Runs/Fresh).Path
+python -B -m Experiments.SummarizePublicReservationTrace
+python -B -m Experiments.AnalyzeContinuousWorlds
+python -B -m Experiments.ExportPaperTables
+python -B -m Experiments.SummarizeRmQuota
+python -B -m Experiments.PlotFigures --data Runs/Fresh/EventScaling --output Runs/FreshFigures
+Remove-Item Env:SLIDING_WINDOW_QUOTA_RESULTS
+~~~
 
-Python checks and trace-derived replays (from the repository root):
+Use a new output directory for a repeat. The event-count experiment times
+accepted calls to the Java validation policies in three JVMs. Each JVM records
+200 pairs per event count after 150 warm-up pairs. The line plots the median of
+the per-JVM medians, and the band spans their minimum and maximum.
 
-```powershell
-python -B verify_bridge.py
-python -B prepare_public_reservation_trace.py      # after placing both raw traces
-python -B measure_online.py --out results/online-repeat
-python -B measure_capacity_online.py --out results/capacity-online-repeat
-```
+### Workload provenance and the guarded-retry experiment
 
-Java policy, replay and ResourceManager experiments:
+The derived reservation stream is included at
+[Results/PublicTrace/Requests.csv](Results/PublicTrace/Requests.csv). Obtain the
+original KTH SP2 and CERIT-SC traces to regenerate that stream and to evaluate
+guards on the later trace slices. The downloader verifies the archive hashes and
+prints the KTH archive page when a manual download is needed.
 
-```powershell
-cd yarn-java
-mvn -o -B -ntp test
-.\run_bridge_replay.ps1 -OutputDirectory ..\results\java-bridge
-python ..\summarize_java_replay.py ..\results\java-bridge
-.\run_plan_replay.ps1 -OutputDirectory ..\results\yarn-plan-replay
-.\run_rm_quota.ps1 -OutputDirectory ..\results\rm-quota
-```
+~~~powershell
+pwsh -File Experiments/DownloadTraces.ps1 -OutDir Runs/Recorded/PublicTrace
+pwsh -File Experiments/DownloadTraces.ps1 -OutDir Runs/Recorded/PublicTrace -VerifyOnly -Derive
+$env:SLIDING_WINDOW_QUOTA_RESULTS = (Resolve-Path Runs/Recorded).Path
+python -B -m Experiments.EvaluatePlacementGuards
+Remove-Item Env:SLIDING_WINDOW_QUOTA_RESULTS
+~~~
 
-Use a new output directory for each run. Timing results in `results/` were
-collected on one machine (i9-14900HX, Windows, OpenJDK 26.0.1, logical CPU 2) and
-are sensitive to the host; the included samples are the measurements reported in
-the paper.
+Workload sources are the [Parallel Workloads Archive](https://www.cs.huji.ac.il/labs/parallel/workload/)
+for Lars Malinowsky's KTH SP2 trace and the [JSSPP archive](https://jsspp.org/workload/)
+for Dalibor Klusáček and Boris Parák's CERIT-SC trace. The upstream trace terms
+apply to their files. Only the derived input and measurements are distributed here.
 
-## Notes
+### Upstream reproducer
 
-- Measurement scripts pin the process to logical CPU 2 where supported.
-- `results/public-trace/` contains the derived `requests.csv` and the per-request
-  replay outputs; the two raw archive files are ignored by Git.
-- Build outputs (`yarn-java/target/`) and Python caches are ignored.
+Apply [YarnQuotaMissedPeak.patch](UpstreamPatches/YarnQuotaMissedPeak.patch)
+to the pinned trunk revision or
+[YarnQuotaMissedPeakYarn12022.patch](UpstreamPatches/YarnQuotaMissedPeakYarn12022.patch)
+to the pinned PR revision. Run the
+TestCapacityOverTimePolicy#testRejectsQuotaPeakBetweenIntegralSamples test
+in Hadoop's ResourceManager module. The test asserts rejection and exposes
+the missed peak when the sampled policy accepts the reservation.
 
 ## License
 
-No license has been assigned to this repository yet. Contact the author before
-reusing the code beyond reviewing and reproducing the reported experiments.
+The original software in this repository is available under [Apache License
+2.0](LICENSE). Vendored Hadoop files retain their upstream license notices.
+[NOTICE](NOTICE) records the Hadoop attribution.

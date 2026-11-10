@@ -1,0 +1,90 @@
+[
+ {
+  "dataset": "kth",
+  "quota": 2,
+  "homogeneous_admits": 1163,
+  "heterogeneous_admits": 1142,
+  "memory_bound_checks": 12,
+  "hetero_sampled_admits": 1163,
+  "hetero_checks": 1395,
+  "hetero_sampled_fa": 44,
+  "hetero_sampled_fr": 2
+ },
+ {
+  "dataset": "kth",
+  "quota": 5,
+  "homogeneous_admits": 1363,
+  "heterogeneous_admits": 1275,
+  "memory_bound_checks": 62,
+  "hetero_sampled_admits": 1273,
+  "hetero_checks": 1383,
+  "hetero_sampled_fa": 1,
+  "hetero_sampled_fr": 3
+ },
+ {
+  "dataset": "kth",
+  "quota": 10,
+  "homogeneous_admits": 1423,
+  "heterogeneous_admits": 1321,
+  "memory_bound_checks": 26,
+  "hetero_sampled_admits": 1321,
+  "hetero_checks": 1363,
+  "hetero_sampled_fa": 0,
+  "hetero_sampled_fr": 0
+ },
+ {
+  "dataset": "kth",
+  "quota": 25,
+  "homogeneous_admits": 1444,
+  "heterogeneous_admits": 1331,
+  "memory_bound_checks": 4,
+  "hetero_sampled_admits": 1331,
+  "hetero_checks": 1337,
+  "hetero_sampled_fa": 0,
+  "hetero_sampled_fr": 0
+ },
+ {
+  "dataset": "cerit",
+  "quota": 2,
+  "homogeneous_admits": 283,
+  "heterogeneous_admits": 259,
+  "memory_bound_checks": 107,
+  "hetero_sampled_admits": 249,
+  "hetero_checks": 1450,
+  "hetero_sampled_fa": 26,
+  "hetero_sampled_fr": 13
+ },
+ {
+  "dataset": "cerit",
+  "quota": 5,
+  "homogeneous_admits": 392,
+  "heterogeneous_admits": 304,
+  "memory_bound_checks": 524,
+  "hetero_sampled_admits": 305,
+  "hetero_checks": 1418,
+  "hetero_sampled_fa": 57,
+  "hetero_sampled_fr": 25
+ },
+ {
+  "dataset": "cerit",
+  "quota": 10,
+  "homogeneous_admits": 316,
+  "heterogeneous_admits": 296,
+  "memory_bound_checks": 174,
+  "hetero_sampled_admits": 241,
+  "hetero_checks": 968,
+  "hetero_sampled_fa": 5,
+  "hetero_sampled_fr": 48
+ },
+ {
+  "dataset": "cerit",
+  "quota": 25,
+  "homogeneous_admits": 280,
+  "heterogeneous_admits": 186,
+  "memory_bound_checks": 30,
+  "hetero_sampled_admits": 237,
+  "hetero_checks": 256,
+  "hetero_sampled_fa": 0,
+  "hetero_sampled_fr": 17
+ }
+]

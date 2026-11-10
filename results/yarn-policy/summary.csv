@@ -1,5 +1,0 @@
-background_segments,expected_accept,samples,median_us,p95_us
-128,false,120,310.35,5100.16
-128,true,120,260.85,3752.38
-1024,false,120,1574.6,3876.69
-1024,true,120,1696.95,3757.455

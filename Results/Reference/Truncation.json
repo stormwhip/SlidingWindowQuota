@@ -1,0 +1,82 @@
+[
+ {
+  "dataset": "kth",
+  "quota": 2,
+  "eff_cores": 1,
+  "eff_mem": 2047,
+  "nom_cores": 2,
+  "nom_mem": 2048,
+  "eff_admits": 1163,
+  "nom_admits": 1228
+ },
+ {
+  "dataset": "kth",
+  "quota": 5,
+  "eff_cores": 5,
+  "eff_mem": 5120,
+  "nom_cores": 5,
+  "nom_mem": 5120,
+  "eff_admits": 1363,
+  "nom_admits": 1363
+ },
+ {
+  "dataset": "kth",
+  "quota": 10,
+  "eff_cores": 10,
+  "eff_mem": 10240,
+  "nom_cores": 10,
+  "nom_mem": 10240,
+  "eff_admits": 1423,
+  "nom_admits": 1423
+ },
+ {
+  "dataset": "kth",
+  "quota": 25,
+  "eff_cores": 25,
+  "eff_mem": 25600,
+  "nom_cores": 25,
+  "nom_mem": 25600,
+  "eff_admits": 1444,
+  "nom_admits": 1444
+ },
+ {
+  "dataset": "cerit",
+  "quota": 2,
+  "eff_cores": 5,
+  "eff_mem": 5242,
+  "nom_cores": 5,
+  "nom_mem": 5243,
+  "eff_admits": 283,
+  "nom_admits": 283
+ },
+ {
+  "dataset": "cerit",
+  "quota": 5,
+  "eff_cores": 12,
+  "eff_mem": 13107,
+  "nom_cores": 13,
+  "nom_mem": 13107,
+  "eff_admits": 392,
+  "nom_admits": 398
+ },
+ {
+  "dataset": "cerit",
+  "quota": 10,
+  "eff_cores": 25,
+  "eff_mem": 26214,
+  "nom_cores": 26,
+  "nom_mem": 26214,
+  "eff_admits": 316,
+  "nom_admits": 324
+ },
+ {
+  "dataset": "cerit",
+  "quota": 25,
+  "eff_cores": 64,
+  "eff_mem": 65536,
+  "nom_cores": 64,
+  "nom_mem": 65536,
+  "eff_admits": 280,
+  "nom_admits": 280
+ }
+]
